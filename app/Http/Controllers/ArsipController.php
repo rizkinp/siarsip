@@ -6,9 +6,52 @@ use App\Models\Arsip;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class ArsipController extends Controller
 {
+    public function edit($id)
+    {
+        $arsip = Arsip::findOrFail($id);
+        $categories = Kategori::all();
+
+        return view('edit_arsip', compact('arsip', 'categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'nomor_surat' => 'required',
+            'kategori' => 'required',
+            'judul' => 'required',
+            'file_surat' => 'nullable|mimes:pdf|max:10240',
+        ]);
+
+        // Temukan data arsip berdasarkan ID
+        $arsip = Arsip::findOrFail($id);
+
+        // Perbarui data arsip
+        $arsip->nomor_surat = $validatedData['nomor_surat'];
+        $arsip->kategori = $validatedData['kategori'];
+        $arsip->judul = $validatedData['judul'];
+
+        // Perbarui file surat jika ada yang diunggah
+        if ($request->hasFile('file_surat')) {
+            // Hapus file lama
+            Storage::delete($arsip->file_surat);
+
+            // Simpan file surat yang baru
+            $filePath = $request->file_surat->storeAs('public/pdfs', $validatedData['judul'] . '.pdf');
+            $arsip->file_surat = $filePath;
+        }
+
+        // Simpan perubahan
+        $arsip->save();
+
+        // Redirect ke halaman yang sesuai atau sesuaikan sesuai kebutuhan Anda
+        return redirect()->route('arsip.index')->with('success', 'Arsip surat berhasil diperbarui.');
+    }
     public function unduhPdf($id)
     {
         $arsip = Arsip::findOrFail($id);
@@ -55,7 +98,7 @@ class ArsipController extends Controller
             'kategori' => 'required',
             'judul' => 'required',
             'file_surat' => 'required|mimes:pdf|max:10240',
-            
+
         ]);
         $filePath = $request->file_surat->storeAs('public/pdfs', $validatedData['judul'] . '.pdf');
         Arsip::create([

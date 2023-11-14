@@ -27,17 +27,18 @@
                     class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                     Arsip Surat
                     <h3 class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Berikut ini adalah surat
-                        yang telah terbit dan diarsipkan.Klik lihat pada kolom aksi untuk menampilkan surat <h3>
+                        yang telah terbit dan diarsipkan.<h3>
+                            <h3 class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Klik "View" pada kolom aksi untuk menampilkan surat.<h3>
                             <p></p>
                 </caption>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="p-4">
-                            <div class="flex items-center">
+                            {{-- <div class="flex items-center">
                                 <input id="checkbox-all-search" type="checkbox"
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                            </div>
+                                {{-- <label for="checkbox-all-search" class="sr-only">checkbox</label> --}}
+                            {{-- </div> --}}
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Nomor Surat
@@ -52,7 +53,7 @@
                             Waktu Pengarsipan
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Aksi
                         </th>
                     </tr>
                 </thead>
@@ -62,11 +63,11 @@
                             class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <!-- Add other table columns as needed -->
                             <td class="w-4 p-4">
-                                <div class="flex items-center">
+                                {{-- <div class="flex items-center">
                                     <input id="checkbox-table-search-{{ $arsip->id }}" type="checkbox"
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                     <label for="checkbox-table-search-{{ $arsip->id }}" class="sr-only">checkbox</label>
-                                </div>
+                                </div> --}}
                             </td>
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -121,7 +122,7 @@
 
             Swal.fire({
                 title: 'Konfirmasi Hapus',
-                text: 'Apakah Anda yakin ingin menghapus data ini?',
+                text: 'Apakah Anda yakin ingin menghapus arsip surat ini?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
@@ -167,53 +168,6 @@
             }
         });
     }
-    //         function confirmDelete(event) {
-    //     event.preventDefault();
-
-    //     var form = event.target;
-    //     var arsipId = form.getAttribute('data-arsip-id');
-
-    //     Swal.fire({
-    //         title: 'Konfirmasi Hapus',
-    //         text: 'Apakah Anda yakin ingin menghapus data ini?',
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#d33',
-    //         cancelButtonColor: '#3085d6',
-    //         confirmButtonText: 'Ya, Hapus!',
-    //         cancelButtonText: 'Batal'
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             // Add a class to the main content container to apply the blur effect
-    //             document.querySelector('.main-content-container').classList.add('blur-background');
-
-    //             // Submit the form after confirmation
-    //             form.submit();
-    //         }
-    //     });
-    // }
-    //     function confirmDelete(event) {
-    //         event.preventDefault();
-
-    //         var form = event.target;
-    //         var arsipId = form.getAttribute('data-arsip-id');
-
-    //         Swal.fire({
-    //             title: 'Konfirmasi Hapus',
-    //             text: 'Apakah Anda yakin ingin menghapus data ini?',
-    //             icon: 'warning',
-    //             showCancelButton: true,
-    //             confirmButtonColor: '#d33',
-    //             cancelButtonColor: '#3085d6',
-    //             confirmButtonText: 'Ya, Hapus!',
-    //             cancelButtonText: 'Batal'
-    //         }).then((result) => {
-    //             if (result.isConfirmed) {
-    //                 // Submit the form after confirmation
-    //                 form.submit();
-    //             }
-    //         });
-    //     }
     // </script>
     <style>
         /* ... your existing styles ... */

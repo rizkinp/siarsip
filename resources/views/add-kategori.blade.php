@@ -5,12 +5,16 @@
 @section('content')
     <div class="p-4 mt-12 sm:ml-64">
         <div class="mt-4 p-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+                <h2 class="text-2xl font-semibold mb-4">KATEGORI SURAT >> Tambah</h2>
+                    <h3 class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Tambahkan data kategori.<h3>
+                    <h3 class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Jika sudah klik button tambah kategori.<h3>
+                    <p></p>
             <div class="pb-4 bg-white dark:bg-gray-900">
                 <!-- Your search input here (if needed) -->
+
             </div>
             <form action="{{ route('kategori.store') }}" method="POST">
                 @csrf
-
                 <div class="mb-4">
                     <label for="id" class="bg-white block text-sm font-medium text-gray-700">ID</label>
                     <input type="text" id="disabled-input" aria-label="disabled input" class="mb-6 bg-slate-400 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $nextCategoryId }}"disabled>

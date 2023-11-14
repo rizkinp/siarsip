@@ -5,13 +5,17 @@
 @section('content')
     <div class="p-4 mt-12 sm:ml-64">
         <div class="mt-4 p-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="mt-4 p-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+                <h2 class="text-2xl font-semibold mb-4">KATEGORI SURAT >> Edit</h2>
+                    <h3 class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Edit data kategori.<h3>
+                    <h3 class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Jika sudah klik button Update kategori.<h3>
+                    <p></p>
             <div class="pb-4 bg-white dark:bg-gray-900">
                 <!-- Your search input here (if needed) -->
             </div>
             <form action="{{ route('kategori.update', $kategori->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-
                 <div class="mb-4">
                     <label for="id" class="bg-slate-400 block text-sm font-medium text-gray-700">ID</label>
                     <input type="text" id="disabled-input" aria-label="disabled input"

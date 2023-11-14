@@ -38,6 +38,10 @@ Route::get('/arsip/{id}', [ArsipController::class, 'show'])->name('arsip.show');
 Route::get('/arsip/{id}/unduh', [ArsipController::class, 'unduhPdf'])->name('arsip.unduh');
 // Proses Hapus Arsip Controller
 Route::delete('/arsip/hapus/{id}', [ArsipController::class, 'delete'])->name('arsip.delete');
+//edit file pdf
+Route::get('arsip/{id}/edit', [ArsipController::class, 'edit'])->name('arsip.edit');
+Route::put('arsip/{id}', [ArsipController::class, 'update'])->name('arsip.update');
+
 
 //Kategori Controllers
 //Kategori route

@@ -3,7 +3,7 @@
 @extends('admin')
 @section('content')
     <div class="p-4 mt-12 sm:ml-64">
-        <div class="mt-4 p-4  relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="mt-4 p-4 relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="pb-4 bg-white dark:bg-gray-900">
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative mt-1 flex">
@@ -26,19 +26,16 @@
 
             {{-- //TABLE KATEGORI --}}
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <caption
-                    class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
-                    TAMBAH KATEGORI
-                    <h1>Tambah kategori Surat Di button Tambah</h1>
+                <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                     KATEGORI SURAT
+                     <h3 class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Berikut ini adalah kategori yang bisa
+                         digunakan untuk melabeli surat.<h3>
+                            <h3 class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400"> Klik "Tambah Kategori" pada kolom aksi untuk menambahkan kategori baru.<h3>
+                            <p></p>
                 </caption>
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" class="p-4">
-                            <div class="flex items-center">
-                                <input id="checkbox-all-search" type="checkbox"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                            </div>
                         </th>
                         <th scope="col" class="px-6 py-3">
                             ID Kategori
@@ -50,21 +47,15 @@
                             Keterangan
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Aksi
                         </th>
                     </tr>
                 </thead>
                 <tbody id="kategori-table-body">
                     @foreach ($categories as $kategori)
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <!-- Add other table columns as needed -->
                             <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-search-{{ $kategori->id }}" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-table-search-{{ $kategori->id }}" class="sr-only">checkbox</label>
-                                </div>
                             </td>
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -102,72 +93,44 @@
         </div>
         <div id="search-results"></div>
         <script>
-            // Use jQuery in noConflict mode
-            function searchKategori() {
-    var searchTerm = $('#table-search').val();
+            function handleSearch() {
+                // Dapatkan nilai pencarian
+                var searchTerm = document.getElementById('table-search').value.toLowerCase();
 
-    fetch(`/kategori/search?search=${searchTerm}`)
-        .then(response => response.text())
-        .then(data => {
-            console.log(data);  // Log the response to the console
-            return JSON.parse(data);  // Attempt to parse the response as JSON
-        })
-        .then(data => {
-            // Process the data and update the search results div
-            updateSearchResults(data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
+                // Dapatkan semua baris tabel
+                var rows = document.querySelectorAll('tbody tr');
 
+                // Iterasi melalui setiap baris tabel
+                rows.forEach(function (row) {
+                    // Dapatkan nilai teks dari setiap kolom dalam baris
+                    var columns = row.querySelectorAll('td, th');
+                    var rowText = Array.from(columns).map(function (column) {
+                        return column.textContent.toLowerCase();
+                    }).join(' ');
 
-    function updateSearchResults(categories) {
-        var resultsDiv = $('#kategori-table-body');
-        resultsDiv.empty();
+                    // Tampilkan atau sembunyikan baris berdasarkan pencarian
+                    if (rowText.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+    // </script>
+    <style>
+        /* ... your existing styles ... */
 
-        if (categories.length > 0) {
-            categories.forEach(category => {
-                resultsDiv.append(`
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <!-- Add other table columns as needed -->
-                        <td class="w-4 p-4">
-                            <div class="flex items-center">
-                                <input type="checkbox"
-                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            </div>
-                        </td>
-                        <th scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            ${category.id}
-                        </th>
-                        <td class="px-6 py-4">
-                            ${category.nama_kategori}
-                        </td>
-                        <td class="px-6 py-4">
-                            ${category.deskripsi}
-                        </td>
-                        <td class="px-6 py-4">
-                            <a href="/kategori/edit/${category.id}" class="mr-5 font-medium text-yellow-400 dark:text-blue-500 hover:underline">Edit</a>
-                            <form action="/kategori/delete/${category.id}" method="POST" onsubmit="confirmDelete(event)">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="mr-3 font-medium text-red-600 dark:text-blue-500 hover:underline">Hapus</button>
-                            </form>
-                        </td>
-                    </tr>
-                `);
-            });
-        } else {
-            resultsDiv.html('<p>No results found.</p>');
+        /* Add this style for the blur effect */
+        .blur-background {
+            filter: blur(5px); /* Adjust the blur amount as needed */
+            transition: filter 0.3s ease-in-out; /* Add a smooth transition effect */
         }
-    }
-
+    </style>
+        <script>
             function confirmDelete(event) {
                 event.preventDefault();
 
                 var form = event.target;
-                var arsipId = form.getAttribute('data-arsip-id');
 
                 Swal.fire({
                     title: 'Konfirmasi Hapus',
@@ -180,10 +143,10 @@
                     cancelButtonText: 'Batal'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Submit the form after confirmation
                         form.submit();
                     }
                 });
             }
         </script>
     @endsection
+</script>
