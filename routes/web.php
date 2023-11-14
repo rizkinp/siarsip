@@ -5,6 +5,8 @@ use App\Http\Controllers\ArsipController;
 use App\Http\Controllers\kategoriController;
 use App\Models\Kategori;
 
+use App\Http\Controllers\MahasiswaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +21,18 @@ use App\Models\Kategori;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/dashboard', function () {
+    return view('admin');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
 
 Route::get('/admin', function () {
     return view('admin');
@@ -57,6 +71,9 @@ Route::put('/kategori/{id}', [KategoriController::class, 'update'])->name('kateg
 Route::delete('/kategori/hapus/{id}', [kategoriController::class, 'delete'])->name('kategori.delete');
 //Proses Search Kategori Controller
 Route::get('/kategori/search', [kategoriController::class, 'search'])->name('kategori.search');
+
+
+Route::get('/daftar-mahasiswa', [MahasiswaController::class, 'index'])->name('user.index');
 
 // serach api
 // web.php
