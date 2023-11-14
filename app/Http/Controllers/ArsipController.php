@@ -6,9 +6,52 @@ use App\Models\Arsip;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class ArsipController extends Controller
 {
+    public function edit($id)
+    {
+        $arsip = Arsip::findOrFail($id);
+        $categories = Kategori::all();
+
+        return view('edit_arsip', compact('arsip', 'categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        // Validate the form data
+        $validatedData = $request->validate([
+            'nomor_surat' => 'required',
+            'kategori' => 'required',
+            'judul' => 'required',
+            'file_surat' => 'nullable|mimes:pdf|max:10240',
+        ]);
+
+        // Temukan data arsip berdasarkan ID
+        $arsip = Arsip::findOrFail($id);
+
+        // Perbarui data arsip
+        $arsip->nomor_surat = $validatedData['nomor_surat'];
+        $arsip->kategori = $validatedData['kategori'];
+        $arsip->judul = $validatedData['judul'];
+
+        // Perbarui file surat jika ada yang diunggah
+        if ($request->hasFile('file_surat')) {
+            // Hapus file lama
+            Storage::delete($arsip->file_surat);
+
+            // Simpan file surat yang baru
+            $filePath = $request->file_surat->storeAs('public/pdfs', $validatedData['judul'] . '.pdf');
+            $arsip->file_surat = $filePath;
+        }
+
+        // Simpan perubahan
+        $arsip->save();
+
+        // Redirect ke halaman yang sesuai atau sesuaikan sesuai kebutuhan Anda
+        return redirect()->route('arsip.index')->with('success', 'Arsip surat berhasil diperbarui.');
+    }
     public function unduhPdf($id)
     {
         $arsip = Arsip::findOrFail($id);
@@ -34,11 +77,6 @@ class ArsipController extends Controller
         return view('show-arsip', compact('arsip'));
     }
 
-
-    // public function create()
-    // {
-    //     return view('add-arsip');
-    // }
     public function create()
     {
         // Fetch categories to be used in the dropdown
@@ -77,36 +115,4 @@ class ArsipController extends Controller
     // Redirect dengan pesan sukses atau tampilkan SweetAlert di sini
     return redirect()->route('arsip.index')->with('success', 'Arsip berhasil dihapus');
 }
-
-    // public function destroy($id)
-    // {
-    //     // Temukan data arsip berdasarkan ID
-    //     $arsip = Arsip::findOrFail($id);
-
-    //     // Hapus data arsip
-    //     $arsip->delete();
-
-    //     return redirect()->route('arsip.index')
-    //         ->with('success', 'Data berhasil dihapus');
-    // }
-
-    // public function confirmDelete($id)
-    // {
-    //     // Ambil data arsip berdasarkan ID
-    //     $arsip = Arsip::findOrFail($id);
-
-    //     return view('confirm-delete', compact('arsip'));
-    // }
-
-    // public function delete($id)
-    // {
-    //     // Hapus data arsip berdasarkan ID
-    //     Arsip::findOrFail($id)->delete();
-
-    //     // Redirect dengan pesan sukses atau tampilkan SweetAlert di sini
-    //     return Redirect::route('arsip.index')->with('success', 'Arsip berhasil dihapus');
-    // }
-
-
-    // Add other methods (create, store, edit, update, delete) as needed
 }

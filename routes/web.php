@@ -72,7 +72,9 @@ Route::delete('/kategori/hapus/{id}', [kategoriController::class, 'delete'])->na
 //Proses Search Kategori Controller
 Route::get('/kategori/search', [kategoriController::class, 'search'])->name('kategori.search');
 
-
+//edit file pdf
+Route::get('arsip/{id}/edit', [ArsipController::class, 'edit'])->name('arsip.edit');
+Route::put('arsip/{id}', [ArsipController::class, 'update'])->name('arsip.update');
 Route::get('/daftar-mahasiswa', [MahasiswaController::class, 'index'])->name('user.index');
 
 // serach api

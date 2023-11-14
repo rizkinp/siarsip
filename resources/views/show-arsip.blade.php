@@ -33,6 +33,18 @@
                 <embed src="{{ Storage::url($arsip->file_surat) }}" type="application/pdf" width="100%" height="600px">
                 {{-- <embed src="{{ asset('storage/' . $arsip->file_surat) }}" type="application/pdf" width="100%" height="600px"> --}}
             </div>
+            <div class="mt-4 flex justify-between items-center">
+                <a href="{{ route('arsip.index') }}" class="inline-block text-white bg-pink-500 px-4 py-2 rounded-md hover:bg-blue-600">
+                    Kembali
+                </a>
+
+                <a href="{{ route('arsip.unduh', $arsip->id) }}" class="inline-block text-white bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-600">
+                    Unduh
+                </a>
+                <a href="{{ route('arsip.edit', $arsip->id) }}" class="inline-block text-white bg-green-500 px-4 py-2 rounded-md hover:bg-green-600">
+                    Edit File
+                </a>
+            </div>
         </div>
     </div>
 @endsection
