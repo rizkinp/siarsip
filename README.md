@@ -1,12 +1,66 @@
-npm install
-composer install
-php artisan key:generate
-php artisan storage:link 
-cp .env.example .env
-php artisan migrate 
-npm run dev
-php artisan serve
+# SIARSIP
 
+Sistem Informasi Arsip (Assesment)
+
+## Tech Stack
+
+- Laravel 10
+- TailwindCSS v3.3.5
+- Flowbite
+- Breeze
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/rizkinp/siarsip
+```
+
+```bash
+  cd siarsip
+```
+
+Install dependencies
+
+```bash
+  composer install
+```
+
+Install Node Package Manager
+```bash
+  npm install
+```
+
+Copy .env.example file
+```bash
+  cp .env.example .env
+```
+
+Generate application key
+```bash
+  php artisan key:generate
+```
+
+Migration Database
+```bash
+  php artisan migrate
+```
+
+Make Storage
+```bash
+    php artisan storage:link 
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+```bash
+  php artisan serve
+```
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
