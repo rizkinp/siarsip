@@ -2,14 +2,14 @@
 
 Sistem Informasi Arsip (Assesment)
 
-## Tech Stack
+## Technology
 
 - Laravel 10
 - TailwindCSS v3.3.5
 - Flowbite
 - Breeze
 
-## Run Locally
+## How To Run This Project
 
 Clone the project
 
