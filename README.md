@@ -9,6 +9,41 @@ Sistem Informasi Arsip (Assesment)
 - Flowbite
 - Breeze
 
+## Dokumentasi
+## Halaman Login
+![image](https://github.com/rizkinp/siarsip/assets/103366502/e41e5755-57f3-4511-895f-28e42e0e8a9b)
+
+ ## Halaman Register
+ ![image](https://github.com/rizkinp/siarsip/assets/103366502/67157e11-59bc-41e0-84f0-b2d6cb004113)
+
+ ## Halaman Dashboard
+ ![image](https://github.com/rizkinp/siarsip/assets/103366502/d3544193-2dcd-448b-9a5a-1992b9004c27)
+
+## Halaman Tampilan Arsip
+![image](https://github.com/rizkinp/siarsip/assets/103366502/3ca90672-54c2-4341-9f17-5d245ac9cdcc)
+
+## Halaman View Arsip
+![image](https://github.com/rizkinp/siarsip/assets/103366502/56cb83f9-a324-46d0-be8f-420841d63f66)
+
+## Halaman Tambah Arsip
+![image](https://github.com/rizkinp/siarsip/assets/103366502/a0c6efc7-d40f-4b45-9096-184adda6ec1c)
+
+## Unduh Data
+![image](https://github.com/rizkinp/siarsip/assets/103366502/54991d13-cd05-4d1d-88df-318ca6d33a26)
+
+## Dialog Hapus Data
+![image](https://github.com/rizkinp/siarsip/assets/103366502/9b88e3fc-ab30-44dd-aa6a-aa8c2cface27)
+
+## Halaman kategori
+
+## Halaman Tambah Kategori
+![image](https://github.com/rizkinp/siarsip/assets/103366502/d1039590-9ddc-446e-ad39-06a0dd314d92)
+
+## Halaman User
+
+
+
+
 ## How To Run This Project
 
 Clone the project
